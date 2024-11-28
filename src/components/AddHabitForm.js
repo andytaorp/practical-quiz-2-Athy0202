@@ -5,9 +5,25 @@ export default function AddHabitForm({ onAddHabit }) {
 
   const handleSubmit = (e) => {
     // TODO: write code to handle form submission
+    e.preventDefault();
+
+    // Call the onAddHabit function to add the new habit
+    onAddHabit(habitName);
+
+    // Reset the form
+    setHabitName("");
+
   };
 
-  return {
-    //TODO: add a form to add a new habit
-  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="New Habit"
+        value={habitName}
+        onChange={(e) => setHabitName(e.target.value)}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
 }
