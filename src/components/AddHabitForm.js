@@ -2,17 +2,17 @@ import React, { useState } from "react";
 
 export default function AddHabitForm({ onAddHabit }) {
   const [habitName, setHabitName] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
-    // TODO: write code to handle form submission
     e.preventDefault();
-
-    // Call the onAddHabit function to add the new habit
+    if (!habitName.trim()) {
+      setError("Habit name cannot be empty.");
+      return;
+    }
+    setError("");
     onAddHabit(habitName);
-
-    // Reset the form
     setHabitName("");
-
   };
 
   return (
@@ -23,7 +23,8 @@ export default function AddHabitForm({ onAddHabit }) {
         value={habitName}
         onChange={(e) => setHabitName(e.target.value)}
       />
-      <button type="submit">Submit</button>
+      <button type="submit">Add Habit</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 }
